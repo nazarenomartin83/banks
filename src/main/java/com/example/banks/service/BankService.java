@@ -36,4 +36,13 @@ public class BankService implements IBankService {
         return BankMapper.EntityToDTO(bankRepository.save(BankMapper.DTOToEntity(bankRecord)));
     }
 
+    @Override
+    public BankRecord delete(Long id) {
+        Optional<Bank> bank = bankRepository.findById(id);
+        if (bank.isEmpty())
+            throw new BankNotFoundException("Bank with id "+id+" not exits.");
+        bankRepository.delete(bank.get());
+        return BankMapper.EntityToDTO(bank.get());
+    }
+
 }

@@ -8,4 +8,5 @@ public interface IBankService {
     BankRecord getById(Long id);
     List<BankRecord> getAll();
     BankRecord create(BankRecord bankRecord);
+    BankRecord delete(Long id);
 }

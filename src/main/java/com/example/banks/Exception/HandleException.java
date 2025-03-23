@@ -11,4 +11,8 @@ public class HandleException {
     public ResponseEntity<String> handleBankNotFoundException(BankNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    @ExceptionHandler(BankAlreadyExistsException.class)
+    public ResponseEntity<String> handleBankAlreadyExistsException(BankAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }
