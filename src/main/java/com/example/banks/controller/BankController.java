@@ -28,7 +28,7 @@ public class BankController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<BankRecord> create(@RequestBody BankRecord bankRecord)
     {
-        return ResponseEntity.ok(bankService.create(bankRecord));
+        return ResponseEntity.status(HttpStatus.CREATED).body(bankService.create(bankRecord));
     }
 
     @DeleteMapping("{id}")
