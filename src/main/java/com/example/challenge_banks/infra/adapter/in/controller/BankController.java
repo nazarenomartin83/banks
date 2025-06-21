@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
@@ -43,5 +44,14 @@ public class BankController {
     public ResponseEntity<Void> delete(@PathVariable long id) {
         actionBank.deleteBank(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    @GetMapping("self")
+    public ResponseEntity callSelf() {
+        RestClient restClient = RestClient.create("http://localhost:8080/banks/");
+        return ResponseEntity.status(HttpStatus.OK).body(restClient.get()
+                .uri("")
+                .retrieve()
+                .toEntity(List.class)
+                .getBody());
     }
 }
